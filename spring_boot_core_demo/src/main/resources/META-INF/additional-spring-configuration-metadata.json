@@ -1,0 +1,43 @@
+{"properties": [
+
+  {
+    "name": "payment-property.type",
+    "type": "java.lang.String",
+    "description": "A description for 'payment-property.type'"
+  },
+  {
+    "name": "paymentProperty.retryCount",
+    "type": "java.lang.String",
+    "description": "A description for 'paymentProperty.retryCount'"
+  },
+  {
+    "name": "paymentProperty.isEnabled",
+    "type": "java.lang.String",
+    "description": "A description for 'paymentProperty.isEnabled'"
+  },
+  {
+    "name": "paymentProperty.timeOut",
+    "type": "java.lang.String",
+    "description": "A description for 'paymentProperty.timeOut'"
+  },
+  {
+    "name": "paymentProperty.isEnabled",
+    "type": "java.lang.String",
+    "description": "A description for 'paymentProperty.isEnabled'"
+  },
+  {
+    "name": "payment-property.retrycount",
+    "type": "java.lang.String",
+    "description": "A description for 'payment-property.retrycount'"
+  },
+  {
+    "name": "payment-property.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'payment-property.enabled'"
+  },
+  {
+    "name": "payment-property.timeout",
+    "type": "java.lang.String",
+    "description": "A description for 'payment-property.timeout'"
+  }
+]}

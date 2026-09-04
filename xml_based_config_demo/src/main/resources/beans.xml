@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+
+    <!-- only one id -->
+    <!-- can have multiple names -->
+    <bean id = "paymentService"
+          name = "paymentService, paymentService2, paymentService3"
+          class = "com.example.PaymentService" >
+                <constructor-arg name = "type" value = "UPI" />
+    </bean>
+
+    <bean id = "orderService" class = "com.example.OrderService" >
+        <property name = "PaymentService" ref = "paymentService" />
+    </bean>
+
+    <bean id="userService" class="com.example.UserService" scope="prototype">
+        <constructor-arg name="usernames">
+            <list>
+                <value>Aditya</value>
+                <value>Rohan</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+
+    <!-- <bean id = "orderService" class = "com.example.OrderService" >
+        <constructor-arg ref="paymentService"/>
+    </bean> -->
+
+</beans>
