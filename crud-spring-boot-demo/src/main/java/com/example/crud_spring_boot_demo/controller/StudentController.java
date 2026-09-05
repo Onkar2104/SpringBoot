@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
@@ -29,6 +30,12 @@ public class StudentController {
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
+
+    // @GetMapping("/home")
+    // public String homePage(){
+    //     System.out.println("Hello");
+    //     return "hello";
+    // }
 
     @PostMapping("/create")
     public ResponseEntity<Student> createStudent(@RequestBody Student student) {
@@ -86,6 +93,28 @@ public class StudentController {
         if(!isDeleted) {
             return ResponseEntity.notFound().build();
         }   return ResponseEntity.ok("Record Deleted");
+    }
+
+    @PatchMapping("/delete-soft/{id}")
+    public ResponseEntity<String> deleteStudentSoftly(@PathVariable Long id) {
+        Boolean isDeleted = studentService.deleteStudentSoftly(id);
+
+        if(!isDeleted) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok("Record Deleted");
+    }
+
+    @PatchMapping("/recover-acc/{id}")
+    public ResponseEntity<String> recoverAcc(@PathVariable Long id) {
+        Boolean isDeleted = studentService.recoverAcc(id);
+
+        if(!isDeleted) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok("Account Recovered");
     }
      
 }
