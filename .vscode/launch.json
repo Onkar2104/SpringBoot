@@ -2,6 +2,19 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Demo",
+            "request": "launch",
+            "mainClass": "Demo"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "com.example.Main",
+            "projectName": "servlet-core-demo"
+        },
+        {
+            "type": "java",
             "name": "CrudSpringBootDemoApplication",
             "request": "launch",
             "mainClass": "com.example.crud_spring_boot_demo.CrudSpringBootDemoApplication"
