@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -34,7 +35,7 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<CreateStudentResponseDTO> createStudent(@Valid @RequestBody CreateStudentRequestDTO studentRequestDTO) {
         CreateStudentResponseDTO createdStudent = studentService.createStudent(studentRequestDTO);
         return ResponseEntity
@@ -44,20 +45,14 @@ public class StudentController {
                 .body(createdStudent);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<CreateStudentResponseDTO> getStudent(@PathVariable Long id) {
         CreateStudentResponseDTO studentResp = studentService.getStudent(id);
 
-        if(studentResp == null) {
-            return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body(null);
-        }   return ResponseEntity
-                .status(200)
-                .body(studentResp);
+        return ResponseEntity.ok(studentResp);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping
     public ResponseEntity<List<CreateStudentResponseDTO>> getAllStudent() {
         List<CreateStudentResponseDTO> studentList = studentService.getAllStudents();
 
@@ -70,46 +65,30 @@ public class StudentController {
                 .body(studentList);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<UpdateStudentResponseDTO> updateStudent(@PathVariable Long id, @Valid @RequestBody UpdateStudentRequestDTO studentReq) {
+    @PutMapping
+    public ResponseEntity<UpdateStudentResponseDTO> updateStudent(@RequestParam Long id, @Valid @RequestBody UpdateStudentRequestDTO studentReq) {
         UpdateStudentResponseDTO studentResp = studentService.updateStudent(id, studentReq);
 
-        if(studentResp == null) {
-            return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body(null);
-        }   return ResponseEntity
-                .status(200)
-                .body(studentResp);
+        return ResponseEntity.ok(studentResp);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteStudent(@PathVariable Long id) {
-        Boolean isDeleted = studentService.deleteStudent(id);
+    @DeleteMapping
+    public ResponseEntity<String> deleteStudent(@RequestParam Long id) {
+        studentService.deleteStudent(id);
 
-        if(!isDeleted) {
-            return ResponseEntity.notFound().build();
-        }   return ResponseEntity.ok("Record Deleted");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @PatchMapping("/delete-soft/{id}")
-    public ResponseEntity<String> deleteStudentSoftly(@PathVariable Long id) {
-        Boolean isDeleted = studentService.deleteStudentSoftly(id);
+    @PatchMapping("/delete-soft")
+    public ResponseEntity<String> deleteStudentSoftly(@RequestParam Long id) {
+        studentService.deleteStudentSoftly(id);
 
-        if(!isDeleted) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok("Record Deleted");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();    
     }
 
-    @PatchMapping("/recover-acc/{id}")
-    public ResponseEntity<String> recoverAcc(@PathVariable Long id) {
-        Boolean isDeleted = studentService.recoverAcc(id);
-
-        if(!isDeleted) {
-            return ResponseEntity.notFound().build();
-        }
+    @PatchMapping("/recover-acc")
+    public ResponseEntity<String> recoverAcc(@RequestParam Long id) {
+        studentService.recoverAcc(id);
 
         return ResponseEntity.ok("Account Recovered");
     }
