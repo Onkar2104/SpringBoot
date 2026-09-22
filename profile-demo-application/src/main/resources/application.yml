@@ -1,0 +1,8 @@
+# spring:
+#   application:
+#     name: profile-demo-application
+
+# app:
+#   welcome:
+#     message: Hello, welcome to application
+#     code: 200 
